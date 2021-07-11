@@ -10,6 +10,7 @@ public class SourceReader {
 		ApplicationContext context =
 				new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 		Student stu = (Student) context.getBean("student");
-		System.out.println(stu);
+		stu.introduce();
 	}
+
 }

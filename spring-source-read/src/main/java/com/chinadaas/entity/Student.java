@@ -20,6 +20,10 @@ public class Student {
 		this.age = age;
 	}
 
+	public void introduce() {
+		System.out.println("我的名字：" + name + " 我的年龄：" + age);
+	}
+
 	@Override
 	public String toString() {
 		return "Student{" +

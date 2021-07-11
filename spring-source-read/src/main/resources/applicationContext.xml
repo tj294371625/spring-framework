@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd">
+        https://www.springframework.org/schema/context/spring-context.xsd
+	    http://www.springframework.org/schema/aop
+		https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<context:component-scan base-package="com.chinadaas.entity"></context:component-scan>
 
@@ -15,5 +18,15 @@
 		<property name="age" value="${student.age}"></property>
 		<property name="name" value="${student.name}"></property>
 	</bean>
+
+	<bean id="aspectHandler" class="com.chinadaas.entity.AspectHandler"/>
+
+	<aop:config>
+		<aop:pointcut id="pointcut" expression="execution(public void com.chinadaas.entity.Student.introduce())"/>
+		<aop:aspect ref="aspectHandler">
+			<aop:before method="beforeMethod" pointcut-ref="pointcut"></aop:before>
+			<aop:after method="afterMethod" pointcut-ref="pointcut"></aop:after>
+		</aop:aspect>
+	</aop:config>
 
 </beans>
